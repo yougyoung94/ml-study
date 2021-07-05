@@ -2,4 +2,5 @@ import numpy as np
 
 
 def initiate_layer(input_dim, output_dim):
-    return np.random.rand(input_dim, output_dim), np.random.rand(1, output_dim)
+    return np.random.randn(input_dim, output_dim) * 0.1, \
+           np.random.randn(output_dim, 1) * 0.1
