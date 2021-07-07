@@ -1,11 +1,13 @@
 import csv
 
-from constructor import *
+import numpy as np
+
+from constructor import forward_propagation, backward_propagation
 
 
 architecture = [
     {
-        'input_dim': [],
+        'input_dim': [784, ],
         'output_dim': [],
         'activation': 'relu',
     },
@@ -20,9 +22,12 @@ architecture = [
         'activation': 'sigmoid',
     },
 ]
-if __name__ == '__main__':
 
-    with open('./data/train.csv', 'rb') as file:
-        train = csv.reader(file)
+
+if __name__ == '__main__':
+    data = np.genfromtxt('../data/train.csv', delimiter=',', skip_header=1)
+    X, Y = data[:, 1:], data[:, 0]
+
+    model = 
 
     pass
