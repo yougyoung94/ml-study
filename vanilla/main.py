@@ -12,18 +12,18 @@ RESCALE = 255
 
 architecture = [
     {
-        'input_dim': [784, ],
-        'output_dim': [],
+        'input_dim': 784,
+        'output_dim': 100,
         'activation': 'relu',
     },
     {
-        'input_dim': [],
-        'output_dim': [],
+        'input_dim': 100,
+        'output_dim': 10,
         'activation': 'relu',
     },
     {
-        'input_dim': [],
-        'output_dim': [],
+        'input_dim': 10,
+        'output_dim': 1,
         'activation': 'sigmoid',
     },
 ]
@@ -35,13 +35,13 @@ def train(X, Y, nn_architecture, epochs, learning_rate):
     accuracy_history = []
 
     for i in range(epochs):
-        Y_hat, cashe = full_forward_propagation(X, params_values, nn_architecture)
+        Y_hat, cache = full_forward_propagation(X, params_values, nn_architecture)
         cost = cross_entropy(Y_hat, Y)
         cost_history.append(cost)
         accuracy = get_accuracy(Y_hat, Y)
         accuracy_history.append(accuracy)
 
-        grads_values = full_backward_propagation(Y_hat, Y, cashe, params_values, nn_architecture)
+        grads_values = full_backward_propagation(Y_hat, Y, cache, params_values, nn_architecture)
         params_values = gradient_descent(params_values, grads_values, nn_architecture, learning_rate)
 
     return params_values, cost_history, accuracy_history
@@ -57,6 +57,6 @@ if __name__ == '__main__':
 
     # TODO: Cross-validation 구현
     # TODO: mini-batch 구현
-    X = X.T / 255
+    X_train = X_train.T / 255
 
-    pass
+    train(X_train, Y_train, architecture, 100, 0.01)
